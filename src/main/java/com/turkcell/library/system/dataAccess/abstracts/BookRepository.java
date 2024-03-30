@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 //jpa db built in methods accessed by extending jpa repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
+    boolean existsByName(String name);
 }
