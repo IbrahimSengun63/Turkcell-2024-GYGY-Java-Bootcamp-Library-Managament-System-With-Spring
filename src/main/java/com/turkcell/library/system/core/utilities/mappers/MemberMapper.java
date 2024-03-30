@@ -24,5 +24,5 @@ public interface MemberMapper {
 
     GetByIdMemberResponse memberFromGetByIdResponse(Member member);
 
-    List<GetAllMemberResponse> memberFromGetAllBookResponse(List<Member> members);
+    List<GetAllMemberResponse> memberFromGetAllResponse(List<Member> members);
 }
