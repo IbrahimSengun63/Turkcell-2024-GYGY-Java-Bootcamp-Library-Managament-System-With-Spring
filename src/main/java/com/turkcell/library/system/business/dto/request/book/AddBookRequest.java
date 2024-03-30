@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.dto.request;
+package com.turkcell.library.system.business.dto.request.book;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

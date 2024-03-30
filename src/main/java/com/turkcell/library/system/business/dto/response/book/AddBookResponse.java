@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.dto.response;
+package com.turkcell.library.system.business.dto.response.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
