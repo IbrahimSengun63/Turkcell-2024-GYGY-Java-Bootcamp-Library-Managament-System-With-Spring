@@ -25,7 +25,7 @@ public class MemberManager implements MemberService {
     private final MemberBusinessRules memberBusinessRules;
 
     @Override
-    public AddMemberResponse addBook(AddMemberRequest addMemberRequest) {
+    public AddMemberResponse addMember(AddMemberRequest addMemberRequest) {
         this.memberBusinessRules.checkIfMemberNameExists(addMemberRequest.getName());
         Member member = MemberMapper.INSTANCE.memberFromAddRequest(addMemberRequest);
         Member savedMember = this.memberRepository.save(member);
@@ -45,14 +45,14 @@ public class MemberManager implements MemberService {
     }
 
     @Override
-    public UpdateMemberResponse updateBook(UpdateMemberRequest updateBookRequest) {
+    public UpdateMemberResponse updateMember(UpdateMemberRequest updateBookRequest) {
         Member member = MemberMapper.INSTANCE.memberFromUpdateRequest(updateBookRequest);
         Member savedMember = this.memberRepository.save(member);
         return MemberMapper.INSTANCE.memberFromUpdateResponse(savedMember);
     }
 
     @Override
-    public void deleteBook(int id) {
+    public void deleteMember(int id) {
         this.memberRepository.deleteById(id);
     }
 }

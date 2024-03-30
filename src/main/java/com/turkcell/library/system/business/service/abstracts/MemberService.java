@@ -11,14 +11,14 @@ import java.util.List;
 
 public interface MemberService {
 
-    AddMemberResponse addBook(AddMemberRequest addMemberRequest);
+    AddMemberResponse addMember(AddMemberRequest addMemberRequest);
 
     GetByIdMemberResponse getMemberById(int id);
 
     List<GetAllMemberResponse> getAllMember();
 
-    UpdateMemberResponse updateBook(UpdateMemberRequest updateBookRequest);
+    UpdateMemberResponse updateMember(UpdateMemberRequest updateBookRequest);
 
-    void deleteBook(int id);
+    void deleteMember(int id);
 
 }

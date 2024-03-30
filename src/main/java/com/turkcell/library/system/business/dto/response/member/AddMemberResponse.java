@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class AddMemberResponse {
-    private int ind;
+    private int id;
     private String name;
 }
