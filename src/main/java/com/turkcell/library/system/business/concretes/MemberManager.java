@@ -1,5 +1,6 @@
-package com.turkcell.library.system.business.service.concretes;
+package com.turkcell.library.system.business.concretes;
 
+import com.turkcell.library.system.business.abstracts.MemberService;
 import com.turkcell.library.system.business.dto.request.member.AddMemberRequest;
 import com.turkcell.library.system.business.dto.request.member.UpdateMemberRequest;
 import com.turkcell.library.system.business.dto.response.member.AddMemberResponse;
@@ -7,7 +8,6 @@ import com.turkcell.library.system.business.dto.response.member.GetAllMemberResp
 import com.turkcell.library.system.business.dto.response.member.GetByIdMemberResponse;
 import com.turkcell.library.system.business.dto.response.member.UpdateMemberResponse;
 import com.turkcell.library.system.business.rules.MemberBusinessRules;
-import com.turkcell.library.system.business.service.abstracts.MemberService;
 import com.turkcell.library.system.core.utilities.mappers.MemberMapper;
 import com.turkcell.library.system.dataAccess.abstracts.MemberRepository;
 import com.turkcell.library.system.entities.Member;
