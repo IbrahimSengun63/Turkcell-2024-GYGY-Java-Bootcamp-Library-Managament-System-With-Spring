@@ -7,6 +7,7 @@ import com.turkcell.library.system.business.dto.response.employee.AddEmployeeRes
 import com.turkcell.library.system.business.dto.response.employee.GetAllEmployeeResponse;
 import com.turkcell.library.system.business.dto.response.employee.GetByIdEmployeeResponse;
 import com.turkcell.library.system.business.dto.response.employee.UpdateEmployeeResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class EmployeesController {
     private final EmployeeService employeeService;
 
     @PostMapping("/addEmployee")
-    public ResponseEntity<AddEmployeeResponse> addEmployee(AddEmployeeRequest addEmployeeRequest) {
+    public ResponseEntity<AddEmployeeResponse> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
         AddEmployeeResponse response = this.employeeService.addEmployee(addEmployeeRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -43,7 +44,7 @@ public class EmployeesController {
     }
 
     @PutMapping("/updateEmployee")
-    public ResponseEntity<UpdateEmployeeResponse> updateEmployee(UpdateEmployeeRequest updateEmployeeRequest) {
+    public ResponseEntity<UpdateEmployeeResponse> updateEmployee(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
         UpdateEmployeeResponse response = this.employeeService.updateEmployee(updateEmployeeRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
