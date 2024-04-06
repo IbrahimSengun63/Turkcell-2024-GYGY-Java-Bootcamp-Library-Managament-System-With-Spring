@@ -48,7 +48,7 @@ public class EmployeesController {
         UpdateEmployeeResponse response = this.employeeService.updateEmployee(updateEmployeeRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("{id}")
+                .path("/{id}")
                 .buildAndExpand(response.getId())
                 .toUri();
         return ResponseEntity.created(location).body(response);
