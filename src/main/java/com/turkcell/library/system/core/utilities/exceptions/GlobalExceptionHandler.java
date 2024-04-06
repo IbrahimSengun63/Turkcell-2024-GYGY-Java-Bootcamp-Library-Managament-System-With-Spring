@@ -18,10 +18,10 @@ public class GlobalExceptionHandler {
     //after the process we return our information stored object problem details
     @ExceptionHandler({BusinessException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionDetails handleBusinessException(BusinessException businessException) {
-        ExceptionDetails exceptionDetails = new ExceptionDetails();
-        exceptionDetails.setDetail(businessException.getMessage());
-        return exceptionDetails;
+    public BusinessExceptionDetails handleBusinessException(BusinessException businessException) {
+        BusinessExceptionDetails businessExceptionDetails = new BusinessExceptionDetails();
+        businessExceptionDetails.setDetail(businessException.getMessage());
+        return businessExceptionDetails;
     }
 
     // Exception handler method to handle MethodArgumentNotValidException
