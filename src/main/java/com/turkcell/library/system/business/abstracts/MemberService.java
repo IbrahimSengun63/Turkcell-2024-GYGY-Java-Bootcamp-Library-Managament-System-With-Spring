@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.service.abstracts;
+package com.turkcell.library.system.business.abstracts;
 
 import com.turkcell.library.system.business.dto.request.member.AddMemberRequest;
 import com.turkcell.library.system.business.dto.request.member.UpdateMemberRequest;

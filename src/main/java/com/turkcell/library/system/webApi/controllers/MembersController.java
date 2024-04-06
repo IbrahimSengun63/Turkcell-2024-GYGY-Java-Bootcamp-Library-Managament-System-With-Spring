@@ -6,7 +6,7 @@ import com.turkcell.library.system.business.dto.response.member.AddMemberRespons
 import com.turkcell.library.system.business.dto.response.member.GetAllMemberResponse;
 import com.turkcell.library.system.business.dto.response.member.GetByIdMemberResponse;
 import com.turkcell.library.system.business.dto.response.member.UpdateMemberResponse;
-import com.turkcell.library.system.business.service.abstracts.MemberService;
+import com.turkcell.library.system.business.abstracts.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
