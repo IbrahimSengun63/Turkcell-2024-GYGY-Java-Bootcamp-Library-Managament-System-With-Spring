@@ -9,8 +9,15 @@ import java.util.Map;
 
 @Getter
 @Setter
-@NoArgsConstructor
+
 @AllArgsConstructor
 public class ValidationExceptionDetails extends ExceptionDetails {
+    public ValidationExceptionDetails(){
+        setTitle("Validation Rule Violation");
+        setDetail("Validation Problem");
+        setType("http://mydomain.com/exceptions/validation");
+        setStatus("400");
+    }
+
     private Map<String, String> validationErrors;
 }
