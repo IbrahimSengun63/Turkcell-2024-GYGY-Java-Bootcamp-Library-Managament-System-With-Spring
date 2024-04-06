@@ -10,5 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExceptionDetails {
-    private String message;
+    private String title;
+    private String detail;
+    private String Status;
+    private String Type;
 }
