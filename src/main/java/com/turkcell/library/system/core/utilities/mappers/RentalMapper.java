@@ -21,13 +21,15 @@ public interface RentalMapper {
 
     Rental rentalFromAddRequest(AddRentalRequest request);
 
-
+    @Mapping(source = "member.id", target = "memberId")
+    @Mapping(source = "book.id", target = "bookId")
     AddRentalResponse AddRentalResponseFromRental(Rental rental);
 
 
     Rental rentalFromUpdateRequest(UpdateRentalRequest request);
 
-
+    @Mapping(source = "member.id", target = "memberId")
+    @Mapping(source = "book.id", target = "bookId")
     UpdateRentalResponse updateResponseFromRental(Rental rental);
 
     @Mapping(source = "member.id", target = "memberId")
