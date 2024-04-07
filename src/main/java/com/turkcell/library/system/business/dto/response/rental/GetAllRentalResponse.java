@@ -16,5 +16,7 @@ public class GetAllRentalResponse {
     private LocalDate startDate;
     private LocalDate endDate;
     private int memberId;
+    private String memberName;
     private int bookId;
+    private String bookName;
 }

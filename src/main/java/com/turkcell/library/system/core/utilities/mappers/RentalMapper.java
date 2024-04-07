@@ -12,22 +12,33 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper
 public interface RentalMapper {
     RentalMapper INSTANCE = Mappers.getMapper(RentalMapper.class);
 
+
     Rental rentalFromAddRequest(AddRentalRequest request);
+
+
     AddRentalResponse AddRentalResponseFromRental(Rental rental);
 
+
     Rental rentalFromUpdateRequest(UpdateRentalRequest request);
-    UpdateRentalResponse UpdateResponseFromRental(Rental rental);
 
-    @Mapping(source = "name",target = "member.id")
-    @Mapping(source = "name",target = "book.id")
-    GetByIdRentalResponse GetByIdResponseFromRental(Rental rental);
 
-    @Mapping(source = "name",target = "member.id")
-    @Mapping(source = "name",target = "book.id")
-    List<GetAllRentalResponse> GetAllRentalResponseFromRentals(List<Rental> rentals);
+    UpdateRentalResponse updateResponseFromRental(Rental rental);
+
+    @Mapping(source = "member.id", target = "memberId")
+    @Mapping(source = "member.name", target = "memberName")
+    @Mapping(source = "book.id", target = "bookId")
+    @Mapping(source = "book.name", target = "bookName")
+    GetByIdRentalResponse getByIdResponseFromRental(Rental rental);
+
+    @Mapping(source = "member.id", target = "memberId")
+    @Mapping(source = "member.name", target = "memberName")
+    @Mapping(source = "book.id", target = "bookId")
+    @Mapping(source = "book.name", target = "bookName")
+    List<GetAllRentalResponse> getAllRentalResponseFromRentals(List<Rental> rentals);
 }

@@ -34,19 +34,19 @@ public class RentalManager implements RentalService {
     public UpdateRentalResponse updateRental(UpdateRentalRequest updateRentalRequest) {
         Rental rental = RentalMapper.INSTANCE.rentalFromUpdateRequest(updateRentalRequest);
         Rental updatedRental = this.rentalRepository.save(rental);
-        return RentalMapper.INSTANCE.UpdateResponseFromRental(updatedRental);
+        return RentalMapper.INSTANCE.updateResponseFromRental(updatedRental);
     }
 
     @Override
     public GetByIdRentalResponse getByIdRental(int id) {
         Rental rental = this.rentalRepository.findById(id).orElseThrow();
-        return RentalMapper.INSTANCE.GetByIdResponseFromRental(rental);
+        return RentalMapper.INSTANCE.getByIdResponseFromRental(rental);
     }
 
     @Override
     public List<GetAllRentalResponse> getAllRental() {
         List<Rental> rentals = this.rentalRepository.findAll();
-        return RentalMapper.INSTANCE.GetAllRentalResponseFromRentals(rentals);
+        return RentalMapper.INSTANCE.getAllRentalResponseFromRentals(rentals);
     }
 
     @Override
