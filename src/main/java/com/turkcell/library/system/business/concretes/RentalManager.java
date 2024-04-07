@@ -1,5 +1,6 @@
 package com.turkcell.library.system.business.concretes;
 
+
 import com.turkcell.library.system.business.abstracts.RentalService;
 import com.turkcell.library.system.business.dto.request.rental.AddRentalRequest;
 import com.turkcell.library.system.business.dto.request.rental.UpdateRentalRequest;
@@ -9,6 +10,8 @@ import com.turkcell.library.system.business.dto.response.rental.GetByIdRentalRes
 import com.turkcell.library.system.business.dto.response.rental.UpdateRentalResponse;
 import com.turkcell.library.system.business.rules.RentalBusinessRule;
 import com.turkcell.library.system.core.utilities.mappers.RentalMapper;
+import com.turkcell.library.system.dataAccess.abstracts.BookRepository;
+import com.turkcell.library.system.dataAccess.abstracts.MemberRepository;
 import com.turkcell.library.system.dataAccess.abstracts.RentalRepository;
 import com.turkcell.library.system.entities.Rental;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +25,16 @@ public class RentalManager implements RentalService {
     private final RentalRepository rentalRepository;
     private final RentalBusinessRule rentalBusinessRule;
 
+    private final MemberRepository memberRepository;
+    private final BookRepository bookRepository;
+
+
     @Override
     public AddRentalResponse addRental(AddRentalRequest addRentalRequest) {
-        this.rentalBusinessRule.checkIfDatesIsNormal(addRentalRequest.getStartDate(),addRentalRequest.getEndDate());
+        this.rentalBusinessRule.checkIfDatesIsNormal(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
         Rental rental = RentalMapper.INSTANCE.rentalFromAddRequest(addRentalRequest);
+        rental.setMember(this.memberRepository.findById(addRentalRequest.getMemberId()).orElseThrow());
+        rental.setBook(this.bookRepository.findById(addRentalRequest.getBookId()).orElseThrow());
         Rental savedRental = this.rentalRepository.save(rental);
         return RentalMapper.INSTANCE.AddRentalResponseFromRental(savedRental);
     }
@@ -33,6 +42,8 @@ public class RentalManager implements RentalService {
     @Override
     public UpdateRentalResponse updateRental(UpdateRentalRequest updateRentalRequest) {
         Rental rental = RentalMapper.INSTANCE.rentalFromUpdateRequest(updateRentalRequest);
+        rental.setMember(this.memberRepository.findById(updateRentalRequest.getMemberId()).orElseThrow());
+        rental.setBook(this.bookRepository.findById(updateRentalRequest.getBookId()).orElseThrow());
         Rental updatedRental = this.rentalRepository.save(rental);
         return RentalMapper.INSTANCE.updateResponseFromRental(updatedRental);
     }
