@@ -23,7 +23,7 @@ public class TransactionsController {
     private final TransactionService transactionService;
 
     @PostMapping("/addTransaction")
-    public ResponseEntity<AddTransactionResponse> addTransaction(@Valid AddTransactionRequest addTransactionRequest) {
+    public ResponseEntity<AddTransactionResponse> addTransaction(@RequestBody @Valid AddTransactionRequest addTransactionRequest) {
         AddTransactionResponse response = this.transactionService.addTransaction(addTransactionRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -44,7 +44,7 @@ public class TransactionsController {
     }
 
     @PutMapping("/updateTransaction")
-    public ResponseEntity<UpdateTransactionResponse> updateTransaction(@Valid UpdateTransactionRequest updateTransactionRequest) {
+    public ResponseEntity<UpdateTransactionResponse> updateTransaction(@RequestBody UpdateTransactionRequest updateTransactionRequest) {
         UpdateTransactionResponse response = this.transactionService.updateTransaction(updateTransactionRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
