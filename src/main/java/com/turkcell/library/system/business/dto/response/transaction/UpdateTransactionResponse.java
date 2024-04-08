@@ -13,7 +13,6 @@ import lombok.Setter;
 public class UpdateTransactionResponse {
     private int id;
     private double debt;
-    @NotNull
     private int operation;
     private int employeeId;
     private int rentalId;
