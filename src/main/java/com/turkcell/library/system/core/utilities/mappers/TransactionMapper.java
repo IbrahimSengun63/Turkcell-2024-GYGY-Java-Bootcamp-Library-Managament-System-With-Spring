@@ -24,6 +24,7 @@ public interface TransactionMapper{
     @Mapping(source = "rental.id",target = "rentalId")
     AddTransactionResponse addResponseFromTransaction(Transaction transaction);
 
+    @Mapping(source = "id",target = "id")
     Transaction transactionFromUpdateRequest(UpdateTransactionRequest updateTransactionRequest);
 
     @Mapping(source = "employee.id",target = "employeeId")

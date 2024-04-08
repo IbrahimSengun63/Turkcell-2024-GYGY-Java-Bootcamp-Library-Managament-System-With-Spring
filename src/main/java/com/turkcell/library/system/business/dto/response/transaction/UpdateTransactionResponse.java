@@ -1,6 +1,6 @@
 package com.turkcell.library.system.business.dto.response.transaction;
 
-import jakarta.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
