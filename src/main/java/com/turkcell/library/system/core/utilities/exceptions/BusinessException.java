@@ -1,7 +1,7 @@
 package com.turkcell.library.system.core.utilities.exceptions;
 
 public class BusinessException extends RuntimeException {
-    //deneme
+
     public BusinessException(String message) {
         super(message);
     }
