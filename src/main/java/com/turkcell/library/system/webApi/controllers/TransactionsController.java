@@ -1,12 +1,12 @@
 package com.turkcell.library.system.webApi.controllers;
 
 import com.turkcell.library.system.business.abstracts.TransactionService;
-import com.turkcell.library.system.business.dto.request.transaction.AddTransactionRequest;
-import com.turkcell.library.system.business.dto.request.transaction.UpdateTransactionRequest;
-import com.turkcell.library.system.business.dto.response.transaction.AddTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.GetAllTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.GetByIdTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.UpdateTransactionResponse;
+import com.turkcell.library.system.business.dto.request.transaction.AddRequestTransaction;
+import com.turkcell.library.system.business.dto.request.transaction.UpdateRequestTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.AddResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.GetAllResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.GetByIdResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.UpdateResponseTransaction;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,9 @@ import java.util.List;
 public class TransactionsController {
     private final TransactionService transactionService;
 
-    @PostMapping("/addTransaction")
-    public ResponseEntity<AddTransactionResponse> addTransaction(@RequestBody @Valid AddTransactionRequest addTransactionRequest) {
-        AddTransactionResponse response = this.transactionService.addTransaction(addTransactionRequest);
+    @PostMapping("/add")
+    public ResponseEntity<AddResponseTransaction> addTransaction(@RequestBody @Valid AddRequestTransaction addRequestTransaction) {
+        AddResponseTransaction response = this.transactionService.addTransaction(addRequestTransaction);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -34,18 +34,18 @@ public class TransactionsController {
     }
 
     @GetMapping("/getById/{id}")
-    public GetByIdTransactionResponse getByIdTransaction(@PathVariable int id) {
+    public GetByIdResponseTransaction getByIdTransaction(@PathVariable int id) {
         return this.transactionService.getByIdTransaction(id);
     }
 
     @GetMapping("/getAll")
-    public List<GetAllTransactionResponse> getAllTransaction() {
+    public List<GetAllResponseTransaction> getAllTransaction() {
         return transactionService.getAllTransaction();
     }
 
-    @PutMapping("/updateTransaction")
-    public ResponseEntity<UpdateTransactionResponse> updateTransaction(@RequestBody UpdateTransactionRequest updateTransactionRequest) {
-        UpdateTransactionResponse response = this.transactionService.updateTransaction(updateTransactionRequest);
+    @PutMapping("/update")
+    public ResponseEntity<UpdateResponseTransaction> updateTransaction(@RequestBody UpdateRequestTransaction updateRequestTransaction) {
+        UpdateResponseTransaction response = this.transactionService.updateTransaction(updateRequestTransaction);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -54,8 +54,8 @@ public class TransactionsController {
         return ResponseEntity.created(location).body(response);
     }
 
-    @DeleteMapping("/deleteRental/{id}")
-    public void deleteRental(@PathVariable int id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteTransaction(@PathVariable int id) {
         this.transactionService.deleteTransaction(id);
     }
 }

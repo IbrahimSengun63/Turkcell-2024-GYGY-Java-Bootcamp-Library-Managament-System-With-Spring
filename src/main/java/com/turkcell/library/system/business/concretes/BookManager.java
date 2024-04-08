@@ -1,12 +1,12 @@
 package com.turkcell.library.system.business.concretes;
 
 import com.turkcell.library.system.business.abstracts.BookService;
-import com.turkcell.library.system.business.dto.request.book.AddBookRequest;
-import com.turkcell.library.system.business.dto.request.book.UpdateBookRequest;
-import com.turkcell.library.system.business.dto.response.book.AddBookResponse;
-import com.turkcell.library.system.business.dto.response.book.GetAllBookResponse;
-import com.turkcell.library.system.business.dto.response.book.GetByIdBookResponse;
-import com.turkcell.library.system.business.dto.response.book.UpdateBookResponse;
+import com.turkcell.library.system.business.dto.request.book.AddRequestBook;
+import com.turkcell.library.system.business.dto.request.book.UpdateRequestBook;
+import com.turkcell.library.system.business.dto.response.book.AddResponseBook;
+import com.turkcell.library.system.business.dto.response.book.GetAllResponseBook;
+import com.turkcell.library.system.business.dto.response.book.GetByIdResponseBook;
+import com.turkcell.library.system.business.dto.response.book.UpdateResponseBook;
 import com.turkcell.library.system.business.rules.BookBusinessRules;
 import com.turkcell.library.system.core.utilities.mappers.BookMapper;
 import com.turkcell.library.system.dataAccess.abstracts.BookRepository;
@@ -26,30 +26,30 @@ public class BookManager implements BookService {
     private final BookBusinessRules bookBusinessRules;
 
     @Override
-    public AddBookResponse addBook(AddBookRequest addBookRequest) {
-        this.bookBusinessRules.checkIfBookNameExists(addBookRequest.getName());
-        Book book = BookMapper.INSTANCE.bookFromAddRequest(addBookRequest);
+    public AddResponseBook addBook(AddRequestBook addRequestBook) {
+        this.bookBusinessRules.checkIfBookNameExists(addRequestBook.getName());
+        Book book = BookMapper.INSTANCE.addRequestToBook(addRequestBook);
         Book savedBook = this.bookRepository.save(book);
-        return BookMapper.INSTANCE.bookFromAddResponse(savedBook);
+        return BookMapper.INSTANCE.bookToAddResponse(savedBook);
     }
 
     @Override
-    public GetByIdBookResponse getBookById(int id) {
+    public GetByIdResponseBook getByIdBook(int id) {
         Book book = this.bookRepository.findById(id).orElseThrow();
-        return BookMapper.INSTANCE.bookFromGetByIdResponse(book);
+        return BookMapper.INSTANCE.bookToGetByIdResponse(book);
     }
 
     @Override
-    public List<GetAllBookResponse> getAllBook() {
+    public List<GetAllResponseBook> getAllBook() {
         List<Book> books = this.bookRepository.findAll();
-        return BookMapper.INSTANCE.bookFromGetAllBookResponse(books);
+        return BookMapper.INSTANCE.booksToGetAllResponse(books);
     }
 
     @Override
-    public UpdateBookResponse updateBook(UpdateBookRequest updateBookRequest) {
-        Book book = BookMapper.INSTANCE.bookFromUpdateRequest(updateBookRequest);
+    public UpdateResponseBook updateBook(UpdateRequestBook updateRequestBook) {
+        Book book = BookMapper.INSTANCE.updateRequestToBook(updateRequestBook);
         Book savedBook = this.bookRepository.save(book);
-        return BookMapper.INSTANCE.bookFromUpdateResponse(savedBook);
+        return BookMapper.INSTANCE.bookToUpdateResponse(savedBook);
     }
 
     @Override

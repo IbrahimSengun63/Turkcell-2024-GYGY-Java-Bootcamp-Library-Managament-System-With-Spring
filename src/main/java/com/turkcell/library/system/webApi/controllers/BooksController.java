@@ -2,12 +2,12 @@ package com.turkcell.library.system.webApi.controllers;
 
 
 import com.turkcell.library.system.business.abstracts.BookService;
-import com.turkcell.library.system.business.dto.request.book.AddBookRequest;
-import com.turkcell.library.system.business.dto.request.book.UpdateBookRequest;
-import com.turkcell.library.system.business.dto.response.book.AddBookResponse;
-import com.turkcell.library.system.business.dto.response.book.GetAllBookResponse;
-import com.turkcell.library.system.business.dto.response.book.GetByIdBookResponse;
-import com.turkcell.library.system.business.dto.response.book.UpdateBookResponse;
+import com.turkcell.library.system.business.dto.request.book.AddRequestBook;
+import com.turkcell.library.system.business.dto.request.book.UpdateRequestBook;
+import com.turkcell.library.system.business.dto.response.book.AddResponseBook;
+import com.turkcell.library.system.business.dto.response.book.GetAllResponseBook;
+import com.turkcell.library.system.business.dto.response.book.GetByIdResponseBook;
+import com.turkcell.library.system.business.dto.response.book.UpdateResponseBook;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +26,11 @@ public class BooksController {
     //web api end point connected to db via business layer
     private final BookService bookService;
 
-    @PostMapping("/addBook")
+    @PostMapping("/add")
 
-    public ResponseEntity<AddBookResponse> add(@RequestBody @Valid AddBookRequest addBookRequest) {
+    public ResponseEntity<AddResponseBook> addBook(@RequestBody @Valid AddRequestBook addRequestBook) {
 
-        AddBookResponse response = this.bookService.addBook(addBookRequest);
+        AddResponseBook response = this.bookService.addBook(addRequestBook);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -40,18 +40,18 @@ public class BooksController {
     }
 
     @GetMapping("/getById/{id}")
-    public GetByIdBookResponse getById(@PathVariable int id) {
-        return this.bookService.getBookById(id);
+    public GetByIdResponseBook getByIdBook(@PathVariable int id) {
+        return this.bookService.getByIdBook(id);
     }
 
     @GetMapping("/getAll")
-    public List<GetAllBookResponse> getAll() {
+    public List<GetAllResponseBook> getAllBook() {
         return this.bookService.getAllBook();
     }
 
-    @PutMapping("/updateBook")
-    public ResponseEntity<UpdateBookResponse> update(@RequestBody UpdateBookRequest updateBookRequest) {
-        UpdateBookResponse response = this.bookService.updateBook(updateBookRequest);
+    @PutMapping("/update")
+    public ResponseEntity<UpdateResponseBook> updateBook(@RequestBody UpdateRequestBook updateRequestBook) {
+        UpdateResponseBook response = this.bookService.updateBook(updateRequestBook);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -61,7 +61,7 @@ public class BooksController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable int id) {
+    public void deleteBook(@PathVariable int id) {
         this.bookService.deleteBook(id);
     }
 }

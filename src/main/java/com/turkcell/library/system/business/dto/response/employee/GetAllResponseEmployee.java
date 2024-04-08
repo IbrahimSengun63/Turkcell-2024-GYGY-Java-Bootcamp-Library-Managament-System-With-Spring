@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.dto.response.book;
+package com.turkcell.library.system.business.dto.response.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,12 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-
-public class AddBookResponse {
+@NoArgsConstructor
+public class GetAllResponseEmployee {
     private int id;
     private String name;
-    private String author;
-    private boolean available;
 }

@@ -1,19 +1,22 @@
 package com.turkcell.library.system.business.abstracts;
 
-import com.turkcell.library.system.business.dto.request.rental.AddRentalRequest;
-import com.turkcell.library.system.business.dto.request.rental.UpdateRentalRequest;
-import com.turkcell.library.system.business.dto.response.rental.AddRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.GetAllRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.GetByIdRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.UpdateRentalResponse;
-import com.turkcell.library.system.entities.Rental;
+import com.turkcell.library.system.business.dto.request.rental.AddRequestRental;
+import com.turkcell.library.system.business.dto.request.rental.UpdateRequestRental;
+import com.turkcell.library.system.business.dto.response.rental.AddResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.GetAllResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.GetByIdResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.UpdateResponseRental;
 
 import java.util.List;
 
 public interface RentalService {
-    AddRentalResponse addRental(AddRentalRequest addRentalRequest);
-    UpdateRentalResponse updateRental(UpdateRentalRequest updateRentalRequest);
-    GetByIdRentalResponse getByIdRental(int id);
-    List<GetAllRentalResponse> getAllRental();
+    AddResponseRental addRental(AddRequestRental addRequestRental);
+
+    UpdateResponseRental updateRental(UpdateRequestRental updateRequestRental);
+
+    GetByIdResponseRental getByIdRental(int id);
+
+    List<GetAllResponseRental> getAllRental();
+
     void deleteRental(int id);
 }

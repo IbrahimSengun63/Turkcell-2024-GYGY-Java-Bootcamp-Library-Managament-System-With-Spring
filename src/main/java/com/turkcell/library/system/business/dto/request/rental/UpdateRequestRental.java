@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateRentalRequest {
+public class UpdateRequestRental {
     private int id;
     private LocalDate startDate;
     private LocalDate endDate;

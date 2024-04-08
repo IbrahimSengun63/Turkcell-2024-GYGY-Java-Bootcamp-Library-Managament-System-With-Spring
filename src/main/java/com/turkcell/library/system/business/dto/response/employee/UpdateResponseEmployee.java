@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdEmployeeResponse {
+public class UpdateResponseEmployee {
+    private int id;
     private String name;
 }

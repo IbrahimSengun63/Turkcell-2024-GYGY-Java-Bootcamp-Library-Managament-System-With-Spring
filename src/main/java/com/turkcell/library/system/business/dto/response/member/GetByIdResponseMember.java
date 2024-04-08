@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.dto.response.employee;
+package com.turkcell.library.system.business.dto.response.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UpdateEmployeeResponse {
+@AllArgsConstructor
+
+public class GetByIdResponseMember {
     private int id;
     private String name;
 }

@@ -1,11 +1,11 @@
 package com.turkcell.library.system.webApi.controllers;
 
-import com.turkcell.library.system.business.dto.request.member.AddMemberRequest;
-import com.turkcell.library.system.business.dto.request.member.UpdateMemberRequest;
-import com.turkcell.library.system.business.dto.response.member.AddMemberResponse;
+import com.turkcell.library.system.business.dto.request.member.AddRequestMember;
+import com.turkcell.library.system.business.dto.request.member.UpdateRequestMember;
+import com.turkcell.library.system.business.dto.response.member.AddResponseMember;
 import com.turkcell.library.system.business.dto.response.member.GetAllMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.GetByIdMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.UpdateMemberResponse;
+import com.turkcell.library.system.business.dto.response.member.GetByIdResponseMember;
+import com.turkcell.library.system.business.dto.response.member.UpdateResponseMember;
 import com.turkcell.library.system.business.abstracts.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +22,9 @@ import java.util.List;
 public class MembersController {
     private final MemberService memberService;
 
-    @PostMapping("/addMember")
-    public ResponseEntity<AddMemberResponse> addMember(@RequestBody @Valid AddMemberRequest addMemberRequest) {
-        AddMemberResponse response = this.memberService.addMember(addMemberRequest);
+    @PostMapping("/add")
+    public ResponseEntity<AddResponseMember> addMember(@RequestBody @Valid AddRequestMember addRequestMember) {
+        AddResponseMember response = this.memberService.addMember(addRequestMember);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -33,18 +33,18 @@ public class MembersController {
         return ResponseEntity.created(location).body(response);
     }
     @GetMapping("/getById/{id}")
-    public GetByIdMemberResponse getById(@PathVariable int id) {
+    public GetByIdResponseMember getByIdMember(@PathVariable int id) {
         return this.memberService.getMemberById(id);
     }
 
-    @GetMapping("/getAllMembers")
+    @GetMapping("/getAll")
     public List<GetAllMemberResponse> getAllMember() {
         return this.memberService.getAllMember();
     }
 
-    @PutMapping("/updateMember")
-    public ResponseEntity<UpdateMemberResponse> updateMember(@RequestBody UpdateMemberRequest updateMemberRequest) {
-        UpdateMemberResponse response = this.memberService.updateMember(updateMemberRequest);
+    @PutMapping("/update")
+    public ResponseEntity<UpdateResponseMember> updateMember(@RequestBody UpdateRequestMember updateRequestMember) {
+        UpdateResponseMember response = this.memberService.updateMember(updateRequestMember);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -53,7 +53,7 @@ public class MembersController {
         return ResponseEntity.created(location).body(response);
     }
 
-    @DeleteMapping("/deleteMember/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteMember(@PathVariable int id) {
         this.memberService.deleteMember(id);
     }

@@ -10,8 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class GetByIdBookResponse {
+public class GetByIdResponseBook {
     private String name;
     private String author;
     private boolean available;

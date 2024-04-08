@@ -1,6 +1,6 @@
-package com.turkcell.library.system.business.dto.request.transaction;
+package com.turkcell.library.system.business.dto.response.transaction;
 
-import jakarta.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddTransactionRequest {
-    //todo: use default value anno
+public class UpdateResponseTransaction {
+    private int id;
     private double debt;
-    @NotNull
     private int operation;
     private int employeeId;
     private int rentalId;

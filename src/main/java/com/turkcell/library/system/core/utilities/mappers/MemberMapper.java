@@ -1,11 +1,11 @@
 package com.turkcell.library.system.core.utilities.mappers;
 
-import com.turkcell.library.system.business.dto.request.member.AddMemberRequest;
-import com.turkcell.library.system.business.dto.request.member.UpdateMemberRequest;
-import com.turkcell.library.system.business.dto.response.member.AddMemberResponse;
+import com.turkcell.library.system.business.dto.request.member.AddRequestMember;
+import com.turkcell.library.system.business.dto.request.member.UpdateRequestMember;
+import com.turkcell.library.system.business.dto.response.member.AddResponseMember;
 import com.turkcell.library.system.business.dto.response.member.GetAllMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.GetByIdMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.UpdateMemberResponse;
+import com.turkcell.library.system.business.dto.response.member.GetByIdResponseMember;
+import com.turkcell.library.system.business.dto.response.member.UpdateResponseMember;
 import com.turkcell.library.system.entities.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -16,13 +16,13 @@ import java.util.List;
 public interface MemberMapper {
     MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
 
-    Member memberFromAddRequest(AddMemberRequest request);
-    AddMemberResponse memberFromAddResponse(Member member);
+    Member addRequestToMember(AddRequestMember addRequestMember);
+    AddResponseMember memberToAddResponse(Member member);
 
-    Member memberFromUpdateRequest(UpdateMemberRequest request);
-    UpdateMemberResponse memberFromUpdateResponse(Member member);
+    Member updateRequestToMember(UpdateRequestMember updateRequestMember);
+    UpdateResponseMember memberToUpdateResponse(Member member);
 
-    GetByIdMemberResponse memberFromGetByIdResponse(Member member);
+    GetByIdResponseMember memberToGetByIdResponse(Member member);
 
-    List<GetAllMemberResponse> memberFromGetAllResponse(List<Member> members);
+    List<GetAllMemberResponse> membersToGetAllResponse(List<Member> members);
 }

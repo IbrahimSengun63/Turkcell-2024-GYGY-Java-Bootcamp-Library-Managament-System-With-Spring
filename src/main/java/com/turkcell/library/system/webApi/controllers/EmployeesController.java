@@ -1,12 +1,12 @@
 package com.turkcell.library.system.webApi.controllers;
 
 import com.turkcell.library.system.business.abstracts.EmployeeService;
-import com.turkcell.library.system.business.dto.request.employee.AddEmployeeRequest;
-import com.turkcell.library.system.business.dto.request.employee.UpdateEmployeeRequest;
-import com.turkcell.library.system.business.dto.response.employee.AddEmployeeResponse;
-import com.turkcell.library.system.business.dto.response.employee.GetAllEmployeeResponse;
-import com.turkcell.library.system.business.dto.response.employee.GetByIdEmployeeResponse;
-import com.turkcell.library.system.business.dto.response.employee.UpdateEmployeeResponse;
+import com.turkcell.library.system.business.dto.request.employee.AddRequestEmployee;
+import com.turkcell.library.system.business.dto.request.employee.UpdateRequestEmployee;
+import com.turkcell.library.system.business.dto.response.employee.AddResponseEmployee;
+import com.turkcell.library.system.business.dto.response.employee.GetAllResponseEmployee;
+import com.turkcell.library.system.business.dto.response.employee.GetByIdResponseEmployee;
+import com.turkcell.library.system.business.dto.response.employee.UpdateResponseEmployee;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,9 @@ import java.util.List;
 public class EmployeesController {
     private final EmployeeService employeeService;
 
-    @PostMapping("/addEmployee")
-    public ResponseEntity<AddEmployeeResponse> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
-        AddEmployeeResponse response = this.employeeService.addEmployee(addEmployeeRequest);
+    @PostMapping("/add")
+    public ResponseEntity<AddResponseEmployee> addEmployee(@RequestBody @Valid AddRequestEmployee addRequestEmployee) {
+        AddResponseEmployee response = this.employeeService.addEmployee(addRequestEmployee);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -34,18 +34,18 @@ public class EmployeesController {
     }
 
     @GetMapping("/getById/{id}")
-    public GetByIdEmployeeResponse getByIdEmployee(@PathVariable int id) {
+    public GetByIdResponseEmployee getByIdEmployee(@PathVariable int id) {
         return this.employeeService.getByIdEmployee(id);
     }
 
     @GetMapping("/getAll")
-    public List<GetAllEmployeeResponse> getAllEmployee() {
+    public List<GetAllResponseEmployee> getAllEmployee() {
         return this.employeeService.getAllEmployee();
     }
 
-    @PutMapping("/updateEmployee")
-    public ResponseEntity<UpdateEmployeeResponse> updateEmployee(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
-        UpdateEmployeeResponse response = this.employeeService.updateEmployee(updateEmployeeRequest);
+    @PutMapping("/update")
+    public ResponseEntity<UpdateResponseEmployee> updateEmployee(@RequestBody UpdateRequestEmployee updateRequestEmployee) {
+        UpdateResponseEmployee response = this.employeeService.updateEmployee(updateRequestEmployee);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -55,7 +55,7 @@ public class EmployeesController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable int id) {
+    public void deleteEmployee(@PathVariable int id) {
         this.employeeService.deleteEmployee(id);
     }
 }

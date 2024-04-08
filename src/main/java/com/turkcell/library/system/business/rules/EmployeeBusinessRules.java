@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeBusinessRules {
     private final EmployeeRepository employeeRepository;
+
     public void checkIfEmployeeNameExists(String name) {
         if (this.employeeRepository.existsByName(name)){
             throw new BusinessException("Employee already exists.");

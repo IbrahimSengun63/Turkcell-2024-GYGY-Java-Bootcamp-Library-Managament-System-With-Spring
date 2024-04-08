@@ -1,11 +1,11 @@
 package com.turkcell.library.system.core.utilities.mappers;
 
-import com.turkcell.library.system.business.dto.request.transaction.AddTransactionRequest;
-import com.turkcell.library.system.business.dto.request.transaction.UpdateTransactionRequest;
-import com.turkcell.library.system.business.dto.response.transaction.AddTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.GetAllTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.GetByIdTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.UpdateTransactionResponse;
+import com.turkcell.library.system.business.dto.request.transaction.AddRequestTransaction;
+import com.turkcell.library.system.business.dto.request.transaction.UpdateRequestTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.AddResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.GetAllResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.GetByIdResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.UpdateResponseTransaction;
 import com.turkcell.library.system.entities.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,27 +18,18 @@ public interface TransactionMapper{
     TransactionMapper INSTANCE = Mappers.getMapper(TransactionMapper.class);
 
 
-    Transaction transactionFromAddRequest(AddTransactionRequest addTransactionRequest);
+    Transaction addRequestToTransaction(AddRequestTransaction addRequestTransaction);
 
     @Mapping(source = "employee.id",target = "employeeId")
     @Mapping(source = "rental.id",target = "rentalId")
-    AddTransactionResponse addResponseFromTransaction(Transaction transaction);
+    AddResponseTransaction transactionToAddResponse(Transaction transaction);
 
     @Mapping(source = "id",target = "id")
-    Transaction transactionFromUpdateRequest(UpdateTransactionRequest updateTransactionRequest);
+    Transaction updateRequestToTransaction(UpdateRequestTransaction updateRequestTransaction);
 
     @Mapping(source = "employee.id",target = "employeeId")
     @Mapping(source = "rental.id",target = "rentalId")
-    UpdateTransactionResponse updateResponseFromTransaction(Transaction transaction);
-
-    @Mapping(source = "employee.id",target = "employeeId")
-    @Mapping(source = "employee.name",target = "employeeName")
-    @Mapping(source = "rental.id",target = "rentalId")
-    @Mapping(source = "rental.member.id", target = "memberId")
-    @Mapping(source = "rental.member.name", target = "memberName")
-    @Mapping(source = "rental.book.id", target = "bookId")
-    @Mapping(source = "rental.book.name", target = "bookName")
-    GetByIdTransactionResponse getByIdTransactionResponseFromTransaction(Transaction transaction);
+    UpdateResponseTransaction transactionToUpdateResponse(Transaction transaction);
 
     @Mapping(source = "employee.id",target = "employeeId")
     @Mapping(source = "employee.name",target = "employeeName")
@@ -47,7 +38,16 @@ public interface TransactionMapper{
     @Mapping(source = "rental.member.name", target = "memberName")
     @Mapping(source = "rental.book.id", target = "bookId")
     @Mapping(source = "rental.book.name", target = "bookName")
-    GetAllTransactionResponse transactionToGetAllTransactionResponse(Transaction transaction);
+    GetByIdResponseTransaction transactionToGetByIdResponse(Transaction transaction);
 
-    List<GetAllTransactionResponse> getAllTransactionResponseFromTransactions(List<Transaction> transactions);
+    @Mapping(source = "employee.id",target = "employeeId")
+    @Mapping(source = "employee.name",target = "employeeName")
+    @Mapping(source = "rental.id",target = "rentalId")
+    @Mapping(source = "rental.member.id", target = "memberId")
+    @Mapping(source = "rental.member.name", target = "memberName")
+    @Mapping(source = "rental.book.id", target = "bookId")
+    @Mapping(source = "rental.book.name", target = "bookName")
+    GetAllResponseTransaction transactionToGetAllResponse(Transaction transaction);
+
+    List<GetAllResponseTransaction> transactionsToGetAllResponse(List<Transaction> transactions);
 }

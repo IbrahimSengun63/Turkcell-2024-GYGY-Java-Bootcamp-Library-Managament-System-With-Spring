@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddRentalResponse {
+public class UpdateResponseRental {
     private int id;
     private LocalDate startDate;
     private LocalDate endDate;

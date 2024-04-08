@@ -2,12 +2,12 @@ package com.turkcell.library.system.business.concretes;
 
 
 import com.turkcell.library.system.business.abstracts.RentalService;
-import com.turkcell.library.system.business.dto.request.rental.AddRentalRequest;
-import com.turkcell.library.system.business.dto.request.rental.UpdateRentalRequest;
-import com.turkcell.library.system.business.dto.response.rental.AddRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.GetAllRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.GetByIdRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.UpdateRentalResponse;
+import com.turkcell.library.system.business.dto.request.rental.AddRequestRental;
+import com.turkcell.library.system.business.dto.request.rental.UpdateRequestRental;
+import com.turkcell.library.system.business.dto.response.rental.AddResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.GetAllResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.GetByIdResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.UpdateResponseRental;
 import com.turkcell.library.system.business.rules.RentalBusinessRule;
 import com.turkcell.library.system.core.utilities.mappers.RentalMapper;
 import com.turkcell.library.system.dataAccess.abstracts.BookRepository;
@@ -30,34 +30,34 @@ public class RentalManager implements RentalService {
 
 
     @Override
-    public AddRentalResponse addRental(AddRentalRequest addRentalRequest) {
-        this.rentalBusinessRule.checkIfDatesIsNormal(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
-        Rental rental = RentalMapper.INSTANCE.rentalFromAddRequest(addRentalRequest);
-        rental.setMember(this.memberRepository.findById(addRentalRequest.getMemberId()).orElseThrow());
-        rental.setBook(this.bookRepository.findById(addRentalRequest.getBookId()).orElseThrow());
+    public AddResponseRental addRental(AddRequestRental addRequestRental) {
+        this.rentalBusinessRule.checkIfDatesIsNormal(addRequestRental.getStartDate(), addRequestRental.getEndDate());
+        Rental rental = RentalMapper.INSTANCE.addRequestToRental(addRequestRental);
+        rental.setMember(this.memberRepository.findById(addRequestRental.getMemberId()).orElseThrow());
+        rental.setBook(this.bookRepository.findById(addRequestRental.getBookId()).orElseThrow());
         Rental savedRental = this.rentalRepository.save(rental);
-        return RentalMapper.INSTANCE.AddRentalResponseFromRental(savedRental);
+        return RentalMapper.INSTANCE.rentalToAddResponse(savedRental);
     }
 
     @Override
-    public UpdateRentalResponse updateRental(UpdateRentalRequest updateRentalRequest) {
-        Rental rental = RentalMapper.INSTANCE.rentalFromUpdateRequest(updateRentalRequest);
-        rental.setMember(this.memberRepository.findById(updateRentalRequest.getMemberId()).orElseThrow());
-        rental.setBook(this.bookRepository.findById(updateRentalRequest.getBookId()).orElseThrow());
+    public UpdateResponseRental updateRental(UpdateRequestRental updateRequestRental) {
+        Rental rental = RentalMapper.INSTANCE.updateRequestToRental(updateRequestRental);
+        rental.setMember(this.memberRepository.findById(updateRequestRental.getMemberId()).orElseThrow());
+        rental.setBook(this.bookRepository.findById(updateRequestRental.getBookId()).orElseThrow());
         Rental updatedRental = this.rentalRepository.save(rental);
-        return RentalMapper.INSTANCE.updateResponseFromRental(updatedRental);
+        return RentalMapper.INSTANCE.rentalToUpdateResponse(updatedRental);
     }
 
     @Override
-    public GetByIdRentalResponse getByIdRental(int id) {
+    public GetByIdResponseRental getByIdRental(int id) {
         Rental rental = this.rentalRepository.findById(id).orElseThrow();
-        return RentalMapper.INSTANCE.getByIdResponseFromRental(rental);
+        return RentalMapper.INSTANCE.rentalToGetByIdResponse(rental);
     }
 
     @Override
-    public List<GetAllRentalResponse> getAllRental() {
+    public List<GetAllResponseRental> getAllRental() {
         List<Rental> rentals = this.rentalRepository.findAll();
-        return RentalMapper.INSTANCE.getAllRentalResponseFromRentals(rentals);
+        return RentalMapper.INSTANCE.rentalsToGetAllResponse(rentals);
     }
 
     @Override

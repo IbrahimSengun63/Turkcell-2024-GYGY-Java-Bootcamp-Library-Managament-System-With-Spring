@@ -1,20 +1,22 @@
 package com.turkcell.library.system.business.abstracts;
 
-import com.turkcell.library.system.business.dto.request.transaction.AddTransactionRequest;
-import com.turkcell.library.system.business.dto.request.transaction.UpdateTransactionRequest;
-import com.turkcell.library.system.business.dto.response.transaction.AddTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.GetAllTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.GetByIdTransactionResponse;
-import com.turkcell.library.system.business.dto.response.transaction.UpdateTransactionResponse;
+import com.turkcell.library.system.business.dto.request.transaction.AddRequestTransaction;
+import com.turkcell.library.system.business.dto.request.transaction.UpdateRequestTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.AddResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.GetAllResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.GetByIdResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.UpdateResponseTransaction;
 
 import java.util.List;
 
 public interface TransactionService {
-    AddTransactionResponse addTransaction(AddTransactionRequest addTransactionRequest);
-    UpdateTransactionResponse updateTransaction(UpdateTransactionRequest updateTransactionRequest);
+    AddResponseTransaction addTransaction(AddRequestTransaction addRequestTransaction);
 
-    GetByIdTransactionResponse getByIdTransaction(int id);
+    UpdateResponseTransaction updateTransaction(UpdateRequestTransaction updateRequestTransaction);
 
-    List<GetAllTransactionResponse> getAllTransaction();
+    GetByIdResponseTransaction getByIdTransaction(int id);
+
+    List<GetAllResponseTransaction> getAllTransaction();
+
     void deleteTransaction(int id);
 }

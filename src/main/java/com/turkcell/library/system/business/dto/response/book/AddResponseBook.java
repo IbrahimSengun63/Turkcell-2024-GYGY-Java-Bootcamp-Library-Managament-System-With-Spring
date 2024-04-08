@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//Via Dto request object, end user db access restricted
-public class GetAllBookResponse {
+public class AddResponseBook {
     private int id;
     private String name;
     private String author;

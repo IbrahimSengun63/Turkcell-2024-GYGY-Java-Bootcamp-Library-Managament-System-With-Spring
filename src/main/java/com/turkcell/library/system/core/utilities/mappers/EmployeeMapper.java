@@ -1,11 +1,11 @@
 package com.turkcell.library.system.core.utilities.mappers;
 
-import com.turkcell.library.system.business.dto.request.employee.AddEmployeeRequest;
-import com.turkcell.library.system.business.dto.request.employee.UpdateEmployeeRequest;
-import com.turkcell.library.system.business.dto.response.employee.AddEmployeeResponse;
-import com.turkcell.library.system.business.dto.response.employee.GetAllEmployeeResponse;
-import com.turkcell.library.system.business.dto.response.employee.GetByIdEmployeeResponse;
-import com.turkcell.library.system.business.dto.response.employee.UpdateEmployeeResponse;
+import com.turkcell.library.system.business.dto.request.employee.AddRequestEmployee;
+import com.turkcell.library.system.business.dto.request.employee.UpdateRequestEmployee;
+import com.turkcell.library.system.business.dto.response.employee.AddResponseEmployee;
+import com.turkcell.library.system.business.dto.response.employee.GetAllResponseEmployee;
+import com.turkcell.library.system.business.dto.response.employee.GetByIdResponseEmployee;
+import com.turkcell.library.system.business.dto.response.employee.UpdateResponseEmployee;
 import com.turkcell.library.system.entities.Employee;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -16,12 +16,12 @@ import java.util.List;
 public interface EmployeeMapper {
     EmployeeMapper INSTANCE = Mappers.getMapper(EmployeeMapper.class);
 
-    Employee employeeFromAddRequest(AddEmployeeRequest request);
-    AddEmployeeResponse employeeFromAddResponse(Employee employee);
+    Employee addRequestToEmployee(AddRequestEmployee addRequestEmployee);
+    AddResponseEmployee employeeToAddResponse(Employee employee);
 
-    Employee employeeFromUpdateRequest(UpdateEmployeeRequest request);
-    UpdateEmployeeResponse employeeFromUpdateResponse(Employee employee);
+    Employee updateRequestToEmployee(UpdateRequestEmployee updateRequestEmployee);
+    UpdateResponseEmployee employeeToUpdateResponse(Employee employee);
 
-    GetByIdEmployeeResponse employeeFromGetByIdResponse(Employee employee);
-    List<GetAllEmployeeResponse> employeeFromGetAllEmployeeResponse(List<Employee> employees);
+    GetByIdResponseEmployee employeeToGetByIdResponse(Employee employee);
+    List<GetAllResponseEmployee> employeesToGetAllResponse(List<Employee> employees);
 }

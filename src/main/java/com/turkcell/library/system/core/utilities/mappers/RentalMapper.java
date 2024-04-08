@@ -1,47 +1,45 @@
 package com.turkcell.library.system.core.utilities.mappers;
 
-import com.turkcell.library.system.business.dto.request.rental.AddRentalRequest;
-import com.turkcell.library.system.business.dto.request.rental.UpdateRentalRequest;
-import com.turkcell.library.system.business.dto.response.rental.AddRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.GetAllRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.GetByIdRentalResponse;
-import com.turkcell.library.system.business.dto.response.rental.UpdateRentalResponse;
+import com.turkcell.library.system.business.dto.request.rental.AddRequestRental;
+import com.turkcell.library.system.business.dto.request.rental.UpdateRequestRental;
+import com.turkcell.library.system.business.dto.response.rental.AddResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.GetAllResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.GetByIdResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.UpdateResponseRental;
 import com.turkcell.library.system.entities.Rental;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper
 public interface RentalMapper {
     RentalMapper INSTANCE = Mappers.getMapper(RentalMapper.class);
 
-    Rental rentalFromAddRequest(AddRentalRequest request);
+    Rental addRequestToRental(AddRequestRental addRequestRental);
 
     @Mapping(source = "member.id", target = "memberId")
     @Mapping(source = "book.id", target = "bookId")
-    AddRentalResponse AddRentalResponseFromRental(Rental rental);
+    AddResponseRental rentalToAddResponse(Rental rental);
 
-    Rental rentalFromUpdateRequest(UpdateRentalRequest request);
+    Rental updateRequestToRental(UpdateRequestRental updateRequestRental);
 
     @Mapping(source = "member.id", target = "memberId")
     @Mapping(source = "book.id", target = "bookId")
-    UpdateRentalResponse updateResponseFromRental(Rental rental);
-
-    @Mapping(source = "member.id", target = "memberId")
-    @Mapping(source = "member.name", target = "memberName")
-    @Mapping(source = "book.id", target = "bookId")
-    @Mapping(source = "book.name", target = "bookName")
-    GetByIdRentalResponse getByIdResponseFromRental(Rental rental);
+    UpdateResponseRental rentalToUpdateResponse(Rental rental);
 
     @Mapping(source = "member.id", target = "memberId")
     @Mapping(source = "member.name", target = "memberName")
     @Mapping(source = "book.id", target = "bookId")
     @Mapping(source = "book.name", target = "bookName")
-    GetAllRentalResponse rentalToGetAllRentalResponse(Rental rental);
+    GetByIdResponseRental rentalToGetByIdResponse(Rental rental);
 
-    List<GetAllRentalResponse> getAllRentalResponseFromRentals(List<Rental> rentals);
+    @Mapping(source = "member.id", target = "memberId")
+    @Mapping(source = "member.name", target = "memberName")
+    @Mapping(source = "book.id", target = "bookId")
+    @Mapping(source = "book.name", target = "bookName")
+    GetAllResponseRental rentalToGetAllResponse(Rental rental);
+
+    List<GetAllResponseRental> rentalsToGetAllResponse(List<Rental> rentals);
 }

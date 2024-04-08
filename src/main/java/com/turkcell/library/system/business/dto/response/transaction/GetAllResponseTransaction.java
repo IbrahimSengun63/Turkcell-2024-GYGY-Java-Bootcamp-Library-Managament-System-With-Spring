@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdTransactionResponse {
+public class GetAllResponseTransaction {
+    private int id;
     private double debt;
     private int operation;
     private int employeeId;

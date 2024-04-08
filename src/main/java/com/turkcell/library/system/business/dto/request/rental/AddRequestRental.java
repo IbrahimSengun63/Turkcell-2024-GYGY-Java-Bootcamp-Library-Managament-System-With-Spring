@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddRentalRequest {
+public class AddRequestRental {
     @NotNull
     private LocalDate startDate;
     private LocalDate endDate;

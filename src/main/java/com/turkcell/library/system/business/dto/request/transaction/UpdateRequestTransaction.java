@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.dto.response.transaction;
+package com.turkcell.library.system.business.dto.request.transaction;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateTransactionResponse {
+public class UpdateRequestTransaction {
     private int id;
     private double debt;
     private int operation;

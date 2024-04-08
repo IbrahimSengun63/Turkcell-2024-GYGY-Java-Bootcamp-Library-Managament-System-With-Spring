@@ -1,23 +1,23 @@
 package com.turkcell.library.system.business.abstracts;
 
-import com.turkcell.library.system.business.dto.request.member.AddMemberRequest;
-import com.turkcell.library.system.business.dto.request.member.UpdateMemberRequest;
-import com.turkcell.library.system.business.dto.response.member.AddMemberResponse;
+import com.turkcell.library.system.business.dto.request.member.AddRequestMember;
+import com.turkcell.library.system.business.dto.request.member.UpdateRequestMember;
+import com.turkcell.library.system.business.dto.response.member.AddResponseMember;
 import com.turkcell.library.system.business.dto.response.member.GetAllMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.GetByIdMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.UpdateMemberResponse;
+import com.turkcell.library.system.business.dto.response.member.GetByIdResponseMember;
+import com.turkcell.library.system.business.dto.response.member.UpdateResponseMember;
 
 import java.util.List;
 
 public interface MemberService {
 
-    AddMemberResponse addMember(AddMemberRequest addMemberRequest);
+    AddResponseMember addMember(AddRequestMember addRequestMember);
 
-    GetByIdMemberResponse getMemberById(int id);
+    GetByIdResponseMember getMemberById(int id);
 
     List<GetAllMemberResponse> getAllMember();
 
-    UpdateMemberResponse updateMember(UpdateMemberRequest updateBookRequest);
+    UpdateResponseMember updateMember(UpdateRequestMember updateBookRequest);
 
     void deleteMember(int id);
 

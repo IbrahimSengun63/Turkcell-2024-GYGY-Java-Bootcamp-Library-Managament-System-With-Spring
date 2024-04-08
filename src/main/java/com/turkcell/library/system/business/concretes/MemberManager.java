@@ -1,23 +1,21 @@
 package com.turkcell.library.system.business.concretes;
 
 import com.turkcell.library.system.business.abstracts.MemberService;
-import com.turkcell.library.system.business.dto.request.member.AddMemberRequest;
-import com.turkcell.library.system.business.dto.request.member.UpdateMemberRequest;
-import com.turkcell.library.system.business.dto.response.member.AddMemberResponse;
+import com.turkcell.library.system.business.dto.request.member.AddRequestMember;
+import com.turkcell.library.system.business.dto.request.member.UpdateRequestMember;
+import com.turkcell.library.system.business.dto.response.member.AddResponseMember;
 import com.turkcell.library.system.business.dto.response.member.GetAllMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.GetByIdMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.UpdateMemberResponse;
+import com.turkcell.library.system.business.dto.response.member.GetByIdResponseMember;
+import com.turkcell.library.system.business.dto.response.member.UpdateResponseMember;
 import com.turkcell.library.system.business.rules.MemberBusinessRules;
 import com.turkcell.library.system.core.utilities.mappers.MemberMapper;
 import com.turkcell.library.system.dataAccess.abstracts.MemberRepository;
 import com.turkcell.library.system.entities.Member;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Data
 @RequiredArgsConstructor
 @Service
 public class MemberManager implements MemberService {
@@ -25,30 +23,30 @@ public class MemberManager implements MemberService {
     private final MemberBusinessRules memberBusinessRules;
 
     @Override
-    public AddMemberResponse addMember(AddMemberRequest addMemberRequest) {
-        this.memberBusinessRules.checkIfMemberNameExists(addMemberRequest.getName());
-        Member member = MemberMapper.INSTANCE.memberFromAddRequest(addMemberRequest);
+    public AddResponseMember addMember(AddRequestMember addRequestMember) {
+        this.memberBusinessRules.checkIfMemberNameExists(addRequestMember.getName());
+        Member member = MemberMapper.INSTANCE.addRequestToMember(addRequestMember);
         Member savedMember = this.memberRepository.save(member);
-        return MemberMapper.INSTANCE.memberFromAddResponse(savedMember);
+        return MemberMapper.INSTANCE.memberToAddResponse(savedMember);
     }
 
     @Override
-    public GetByIdMemberResponse getMemberById(int id) {
+    public GetByIdResponseMember getMemberById(int id) {
         Member member = this.memberRepository.findById(id).orElseThrow();
-        return MemberMapper.INSTANCE.memberFromGetByIdResponse(member);
+        return MemberMapper.INSTANCE.memberToGetByIdResponse(member);
     }
 
     @Override
     public List<GetAllMemberResponse> getAllMember() {
         List<Member> books = this.memberRepository.findAll();
-        return MemberMapper.INSTANCE.memberFromGetAllResponse(books);
+        return MemberMapper.INSTANCE.membersToGetAllResponse(books);
     }
 
     @Override
-    public UpdateMemberResponse updateMember(UpdateMemberRequest updateBookRequest) {
-        Member member = MemberMapper.INSTANCE.memberFromUpdateRequest(updateBookRequest);
+    public UpdateResponseMember updateMember(UpdateRequestMember updateBookRequest) {
+        Member member = MemberMapper.INSTANCE.updateRequestToMember(updateBookRequest);
         Member savedMember = this.memberRepository.save(member);
-        return MemberMapper.INSTANCE.memberFromUpdateResponse(savedMember);
+        return MemberMapper.INSTANCE.memberToUpdateResponse(savedMember);
     }
 
     @Override

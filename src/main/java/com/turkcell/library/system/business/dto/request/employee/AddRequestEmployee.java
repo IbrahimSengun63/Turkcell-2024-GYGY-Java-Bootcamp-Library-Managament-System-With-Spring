@@ -1,4 +1,4 @@
-package com.turkcell.library.system.business.dto.request.member;
+package com.turkcell.library.system.business.dto.request.employee;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,12 +9,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-
-public class AddMemberRequest {
-    // field validations defined
-    // to make it active this validations in web api layer at the related end point we must define @Valid annotations as well
+@NoArgsConstructor
+public class AddRequestEmployee {
     @NotBlank
     @Size(min = 3, max = 20)
     private String name;
