@@ -16,5 +16,5 @@ public interface TransactionService {
     GetByIdTransactionResponse getByIdTransaction(int id);
 
     List<GetAllTransactionResponse> getAllTransaction();
-    void deleteTransaction();
+    void deleteTransaction(int id);
 }

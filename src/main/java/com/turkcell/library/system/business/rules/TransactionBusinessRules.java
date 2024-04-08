@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionBusinessRules {
-    public void checkIsDebtNormal(Double debt) {
+    public void checkIfDebtNormal(Double debt) {
         if (debt < 0) {
             throw new BusinessException("Debt can not be negative");
         }

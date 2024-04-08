@@ -33,19 +33,19 @@ public interface TransactionMapper{
     @Mapping(source = "employee.id",target = "employeeId")
     @Mapping(source = "employee.name",target = "employeeName")
     @Mapping(source = "rental.id",target = "rentalId")
-    @Mapping(source = "member.id", target = "memberId")
-    @Mapping(source = "member.name", target = "memberName")
-    @Mapping(source = "book.id", target = "bookId")
-    @Mapping(source = "book.name", target = "bookName")
+//    @Mapping(source = "rental.member.id", target = "memberId")
+//    @Mapping(source = "rental.member.name", target = "memberName")
+//    @Mapping(source = "rental.book.id", target = "bookId")
+//    @Mapping(source = "rental.book.name", target = "bookName")
     GetByIdTransactionResponse getByIdTransactionResponseFromTransaction(Transaction transaction);
 
     @Mapping(source = "employee.id",target = "employeeId")
     @Mapping(source = "employee.name",target = "employeeName")
     @Mapping(source = "rental.id",target = "rentalId")
-    @Mapping(source = "member.id", target = "memberId")
-    @Mapping(source = "member.name", target = "memberName")
-    @Mapping(source = "book.id", target = "bookId")
-    @Mapping(source = "book.name", target = "bookName")
+//    @Mapping(source = "rental.member.id", target = "memberId")
+//    @Mapping(source = "rental.member.name", target = "memberName")
+//    @Mapping(source = "rental.book.id", target = "bookId")
+//    @Mapping(source = "rental.book.name", target = "bookName")
     GetAllTransactionResponse transactionToGetAllTransactionResponse(Transaction transaction);
 
     List<GetAllTransactionResponse> getAllTransactionResponseFromTransactions(List<Transaction> transactions);
