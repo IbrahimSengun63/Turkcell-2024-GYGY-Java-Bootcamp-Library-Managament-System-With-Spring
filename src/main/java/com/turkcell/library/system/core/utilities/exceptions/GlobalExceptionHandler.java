@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -36,7 +37,7 @@ public class GlobalExceptionHandler {
 
     // Exception handler method to handle MethodArgumentNotValidException
     // It responds with HTTP status code 400 (Bad Request) for this type of exception
-    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionDetails handleValidationException(MethodArgumentNotValidException ex) {
         // Create a new instance of ValidationProblemDetails to encapsulate validation errors
@@ -45,7 +46,8 @@ public class GlobalExceptionHandler {
         validationExceptionDetails.setDetail("VALIDATION.EXCEPTION");
         // Extract field errors from the exception, convert them into a map, and store them in validationProblemDetails
         validationExceptionDetails.setValidationErrors(ex.getBindingResult().getFieldErrors().stream()
-                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)));
+                .collect(Collectors.toMap(error -> Objects.requireNonNull(error.getCodes())[error.getCodes().length - 1], FieldError::getDefaultMessage)));
+
         // Return the instance containing the validation errors
         return validationExceptionDetails;
     }
