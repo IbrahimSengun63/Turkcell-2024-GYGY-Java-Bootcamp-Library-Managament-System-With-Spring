@@ -3,10 +3,7 @@ package com.turkcell.library.system.webApi.controllers;
 import com.turkcell.library.system.business.abstracts.TransactionService;
 import com.turkcell.library.system.business.dto.request.transaction.AddRequestTransaction;
 import com.turkcell.library.system.business.dto.request.transaction.UpdateRequestTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.AddResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.GetAllResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.GetByIdResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.UpdateResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +54,10 @@ public class TransactionsController {
     @DeleteMapping("/delete/{id}")
     public void deleteTransaction(@PathVariable int id) {
         this.transactionService.deleteTransaction(id);
+    }
+
+    @GetMapping("/getTransactionByEmployee/{id}")
+    public List<ListResponseTransactions> getTransactionByEmployee(@PathVariable int id) {
+        return this.transactionService.listEmployeeTransactions(id);
     }
 }
