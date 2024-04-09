@@ -41,7 +41,7 @@ public class RentalsController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<UpdateResponseRental> updateRental(UpdateRequestRental updateRequestRental) {
+    public ResponseEntity<UpdateResponseRental> updateRental(@RequestBody @Valid UpdateRequestRental updateRequestRental) {
         UpdateResponseRental response = this.rentalService.updateRental(updateRequestRental);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

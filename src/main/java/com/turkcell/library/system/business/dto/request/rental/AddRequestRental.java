@@ -17,6 +17,8 @@ public class AddRequestRental {
     @NotNull
     private LocalDate startDate;
     private LocalDate endDate;
+    @NotNull
     private int memberId;
+    @NotNull
     private int bookId;
 }

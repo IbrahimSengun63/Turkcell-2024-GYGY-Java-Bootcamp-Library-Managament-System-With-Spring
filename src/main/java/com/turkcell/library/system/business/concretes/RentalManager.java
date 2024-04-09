@@ -26,13 +26,14 @@ import java.util.List;
 public class RentalManager implements RentalService {
     private final RentalRepository rentalRepository;
     private final RentalBusinessRule rentalBusinessRule;
-
     private final MemberRepository memberRepository;
     private final BookRepository bookRepository;
 
 
     @Override
     public AddResponseRental addRental(AddRequestRental addRequestRental) {
+        this.rentalBusinessRule.checkIfBookExists(addRequestRental.getBookId());
+        this.rentalBusinessRule.checkIfMemberExists(addRequestRental.getMemberId());
         this.rentalBusinessRule.checkIfDatesIsNormal(addRequestRental.getStartDate(), addRequestRental.getEndDate());
         Rental rental = RentalMapper.INSTANCE.addRequestToRental(addRequestRental);
         rental.setMember(this.memberRepository.findById(addRequestRental.getMemberId()).orElseThrow());
@@ -43,6 +44,10 @@ public class RentalManager implements RentalService {
 
     @Override
     public UpdateResponseRental updateRental(UpdateRequestRental updateRequestRental) {
+        this.rentalBusinessRule.checkIfRentalExists(updateRequestRental.getId());
+        this.rentalBusinessRule.checkIfBookExists(updateRequestRental.getBookId());
+        this.rentalBusinessRule.checkIfMemberExists(updateRequestRental.getMemberId());
+        this.rentalBusinessRule.checkIfDatesIsNormal(updateRequestRental.getStartDate(), updateRequestRental.getEndDate());
         Rental rental = RentalMapper.INSTANCE.updateRequestToRental(updateRequestRental);
         rental.setMember(this.memberRepository.findById(updateRequestRental.getMemberId()).orElseThrow());
         rental.setBook(this.bookRepository.findById(updateRequestRental.getBookId()).orElseThrow());

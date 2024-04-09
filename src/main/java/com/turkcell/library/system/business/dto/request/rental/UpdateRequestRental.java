@@ -1,5 +1,6 @@
 package com.turkcell.library.system.business.dto.request.rental;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UpdateRequestRental {
     private int id;
+    @NotNull
     private LocalDate startDate;
     private LocalDate endDate;
+    @NotNull
     private int memberId;
+    @NotNull
     private int bookId;
 }
