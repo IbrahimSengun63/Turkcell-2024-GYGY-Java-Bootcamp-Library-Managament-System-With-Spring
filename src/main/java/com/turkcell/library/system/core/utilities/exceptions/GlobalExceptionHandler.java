@@ -45,8 +45,11 @@ public class GlobalExceptionHandler {
         // Set the message for the validation exception
         validationExceptionDetails.setDetail("VALIDATION.EXCEPTION");
         // Extract field errors from the exception, convert them into a map, and store them in validationProblemDetails
-        validationExceptionDetails.setValidationErrors(ex.getBindingResult().getFieldErrors().stream()
-                .collect(Collectors.toMap(error -> Objects.requireNonNull(error.getCodes())[error.getCodes().length - 1], FieldError::getDefaultMessage)));
+        validationExceptionDetails.setValidationErrors(
+                ex.getBindingResult().getFieldErrors().stream()
+                        .collect(Collectors.toMap(error -> Objects.requireNonNull(error.getCodes())[error.getCodes().length - 1],
+                                error -> error.getField() + " field " + error.getDefaultMessage()))
+        );
 
         // Return the instance containing the validation errors
         return validationExceptionDetails;
