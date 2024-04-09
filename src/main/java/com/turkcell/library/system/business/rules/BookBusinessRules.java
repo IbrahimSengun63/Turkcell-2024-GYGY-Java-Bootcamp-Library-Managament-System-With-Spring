@@ -15,4 +15,9 @@ public class BookBusinessRules {
             throw new BusinessException("Book already exists");
         }
     }
+    public void checkIfBookExists(int id) {
+        if (this.bookRepository.findById(id).isEmpty()) {
+            throw new BusinessException("Book with " + id + " id couldn't be found");
+        }
+    }
 }

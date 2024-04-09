@@ -47,6 +47,8 @@ public class BookManager implements BookService {
 
     @Override
     public UpdateResponseBook updateBook(UpdateRequestBook updateRequestBook) {
+        this.bookBusinessRules.checkIfBookExists(updateRequestBook.getId());
+        this.bookBusinessRules.checkIfBookNameExists(updateRequestBook.getName());
         Book book = BookMapper.INSTANCE.updateRequestToBook(updateRequestBook);
         Book savedBook = this.bookRepository.save(book);
         return BookMapper.INSTANCE.bookToUpdateResponse(savedBook);

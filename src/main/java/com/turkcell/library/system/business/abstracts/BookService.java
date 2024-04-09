@@ -10,7 +10,6 @@ import com.turkcell.library.system.business.dto.response.book.UpdateResponseBook
 import java.util.List;
 
 public interface BookService {
-    //Book entity replaced with DTO object to apply restriction on db access
     AddResponseBook addBook(AddRequestBook addRequestBook);
 
     GetByIdResponseBook getByIdBook(int id);

@@ -50,7 +50,7 @@ public class BooksController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<UpdateResponseBook> updateBook(@RequestBody UpdateRequestBook updateRequestBook) {
+    public ResponseEntity<UpdateResponseBook> updateBook(@RequestBody @Valid UpdateRequestBook updateRequestBook) {
         UpdateResponseBook response = this.bookService.updateBook(updateRequestBook);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
