@@ -3,10 +3,7 @@ package com.turkcell.library.system.business.concretes;
 import com.turkcell.library.system.business.abstracts.MemberService;
 import com.turkcell.library.system.business.dto.request.member.AddRequestMember;
 import com.turkcell.library.system.business.dto.request.member.UpdateRequestMember;
-import com.turkcell.library.system.business.dto.response.member.AddResponseMember;
-import com.turkcell.library.system.business.dto.response.member.GetAllMemberResponse;
-import com.turkcell.library.system.business.dto.response.member.GetByIdResponseMember;
-import com.turkcell.library.system.business.dto.response.member.UpdateResponseMember;
+import com.turkcell.library.system.business.dto.response.member.*;
 import com.turkcell.library.system.business.rules.MemberBusinessRules;
 import com.turkcell.library.system.core.utilities.mappers.MemberMapper;
 import com.turkcell.library.system.dataAccess.abstracts.MemberRepository;
@@ -53,4 +50,5 @@ public class MemberManager implements MemberService {
     public void deleteMember(int id) {
         this.memberRepository.deleteById(id);
     }
+
 }

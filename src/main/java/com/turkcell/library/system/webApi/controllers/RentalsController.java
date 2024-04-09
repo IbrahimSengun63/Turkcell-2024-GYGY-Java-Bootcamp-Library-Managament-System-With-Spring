@@ -3,10 +3,7 @@ package com.turkcell.library.system.webApi.controllers;
 import com.turkcell.library.system.business.abstracts.RentalService;
 import com.turkcell.library.system.business.dto.request.rental.AddRequestRental;
 import com.turkcell.library.system.business.dto.request.rental.UpdateRequestRental;
-import com.turkcell.library.system.business.dto.response.rental.AddResponseRental;
-import com.turkcell.library.system.business.dto.response.rental.GetAllResponseRental;
-import com.turkcell.library.system.business.dto.response.rental.GetByIdResponseRental;
-import com.turkcell.library.system.business.dto.response.rental.UpdateResponseRental;
+import com.turkcell.library.system.business.dto.response.rental.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +54,10 @@ public class RentalsController {
     @DeleteMapping("/delete/{id}")
     public void deleteRental(@PathVariable int id) {
         this.rentalService.deleteRental(id);
+    }
+
+    @GetMapping("/getRentalsByMember/{id}")
+    public List<ListResponseRentals> getRentalsByMember(@PathVariable int id) {
+        return this.rentalService.listMemberRentals(id);
     }
 }
