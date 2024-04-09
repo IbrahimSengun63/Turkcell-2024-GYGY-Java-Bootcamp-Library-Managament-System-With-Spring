@@ -41,6 +41,8 @@ public class MemberManager implements MemberService {
 
     @Override
     public UpdateResponseMember updateMember(UpdateRequestMember updateBookRequest) {
+        this.memberBusinessRules.checkIfMemberExists(updateBookRequest.getId());
+        this.memberBusinessRules.checkIfMemberNameExists(updateBookRequest.getName());
         Member member = MemberMapper.INSTANCE.updateRequestToMember(updateBookRequest);
         Member savedMember = this.memberRepository.save(member);
         return MemberMapper.INSTANCE.memberToUpdateResponse(savedMember);

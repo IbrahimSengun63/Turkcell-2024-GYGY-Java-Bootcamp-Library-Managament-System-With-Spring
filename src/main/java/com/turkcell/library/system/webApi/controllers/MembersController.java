@@ -43,7 +43,7 @@ public class MembersController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<UpdateResponseMember> updateMember(@RequestBody UpdateRequestMember updateRequestMember) {
+    public ResponseEntity<UpdateResponseMember> updateMember(@RequestBody @Valid UpdateRequestMember updateRequestMember) {
         UpdateResponseMember response = this.memberService.updateMember(updateRequestMember);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

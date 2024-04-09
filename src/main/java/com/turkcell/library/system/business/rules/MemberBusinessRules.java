@@ -15,4 +15,10 @@ public class MemberBusinessRules {
             throw new BusinessException("Member already exists");
         }
     }
+
+    public void checkIfMemberExists(int id) {
+        if (this.memberRepository.findById(id).isEmpty()) {
+            throw new BusinessException("Member with " + id + " id couldn't be found");
+        }
+    }
 }
