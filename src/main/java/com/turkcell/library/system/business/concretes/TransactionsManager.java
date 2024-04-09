@@ -3,13 +3,11 @@ package com.turkcell.library.system.business.concretes;
 import com.turkcell.library.system.business.abstracts.TransactionService;
 import com.turkcell.library.system.business.dto.request.transaction.AddRequestTransaction;
 import com.turkcell.library.system.business.dto.request.transaction.UpdateRequestTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.AddResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.GetAllResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.GetByIdResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.UpdateResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.*;
 import com.turkcell.library.system.business.rules.TransactionBusinessRules;
 import com.turkcell.library.system.core.utilities.mappers.TransactionMapper;
 import com.turkcell.library.system.dataAccess.abstracts.*;
+import com.turkcell.library.system.entities.Employee;
 import com.turkcell.library.system.entities.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,5 +58,14 @@ public class TransactionsManager implements TransactionService {
     @Override
     public void deleteTransaction(int id) {
         this.transactionRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ListResponseTransactions> listEmployeeTransactions(int employeeId) {
+        //busines rule define
+        Employee employee = this.employeeRepository.findById(employeeId).orElseThrow();
+        List<Transaction> transactions = this.transactionRepository.findByEmployeeId(employeeId);
+        employee.setTransactions(transactions);
+        return TransactionMapper.INSTANCE.transactionsToListResponse(transactions);
     }
 }

@@ -2,10 +2,7 @@ package com.turkcell.library.system.core.utilities.mappers;
 
 import com.turkcell.library.system.business.dto.request.transaction.AddRequestTransaction;
 import com.turkcell.library.system.business.dto.request.transaction.UpdateRequestTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.AddResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.GetAllResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.GetByIdResponseTransaction;
-import com.turkcell.library.system.business.dto.response.transaction.UpdateResponseTransaction;
+import com.turkcell.library.system.business.dto.response.transaction.*;
 import com.turkcell.library.system.entities.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -50,4 +47,19 @@ public interface TransactionMapper{
     GetAllResponseTransaction transactionToGetAllResponse(Transaction transaction);
 
     List<GetAllResponseTransaction> transactionsToGetAllResponse(List<Transaction> transactions);
+
+    @Mapping(source = "employee.id",target = "employeeId")
+    @Mapping(source = "employee.name",target = "employeeName")
+    @Mapping(source = "id",target = "transactionId")
+    @Mapping(source = "rental.id",target = "rentalId")
+    @Mapping(source = "rental.startDate", target = "startDate")
+    @Mapping(source = "rental.endDate", target = "endDate")
+    @Mapping(source = "rental.member.id", target = "memberId")
+    @Mapping(source = "rental.member.name", target = "memberName")
+    @Mapping(source = "rental.book.id", target = "bookId")
+    @Mapping(source = "rental.book.name", target = "bookName")
+    @Mapping(source = "rental.book.available", target = "bookAvailability")
+    ListResponseTransactions transactionToListResponse(Transaction transaction);
+
+    List<ListResponseTransactions> transactionsToListResponse(List<Transaction> transactions);
 }
