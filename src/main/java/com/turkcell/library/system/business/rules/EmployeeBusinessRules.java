@@ -15,4 +15,10 @@ public class EmployeeBusinessRules {
             throw new BusinessException("Employee already exists.");
         }
     }
+
+    public void checkIfEmployeeExists(int id) {
+        if (this.employeeRepository.findById(id).isEmpty()) {
+            throw new BusinessException("Employee with " + id + " id couldn't be found");
+        }
+    }
 }

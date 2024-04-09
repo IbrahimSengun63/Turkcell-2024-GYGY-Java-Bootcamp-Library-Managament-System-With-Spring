@@ -44,7 +44,7 @@ public class EmployeesController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<UpdateResponseEmployee> updateEmployee(@RequestBody UpdateRequestEmployee updateRequestEmployee) {
+    public ResponseEntity<UpdateResponseEmployee> updateEmployee(@RequestBody @Valid UpdateRequestEmployee updateRequestEmployee) {
         UpdateResponseEmployee response = this.employeeService.updateEmployee(updateRequestEmployee);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

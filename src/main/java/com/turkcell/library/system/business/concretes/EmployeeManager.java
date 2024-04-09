@@ -31,6 +31,8 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public UpdateResponseEmployee updateEmployee(UpdateRequestEmployee updateRequestEmployee) {
+        this.employeeBusinessRules.checkIfEmployeeExists(updateRequestEmployee.getId());
+        this.employeeBusinessRules.checkIfEmployeeNameExists(updateRequestEmployee.getName());
         Employee employee = EmployeeMapper.INSTANCE.updateRequestToEmployee(updateRequestEmployee);
         Employee updatedEmployee = this.employeeRepository.save(employee);
         return EmployeeMapper.INSTANCE.employeeToUpdateResponse(updatedEmployee);
