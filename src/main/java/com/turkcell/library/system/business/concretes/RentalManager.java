@@ -75,9 +75,9 @@ public class RentalManager implements RentalService {
     @Override
     public List<ListResponseRentals> listMemberRentals(int id) {
         //business rule define
-        Member member = this.memberRepository.findById(id).orElseThrow();
+        this.rentalBusinessRule.checkIfMemberExists(id);
         List<Rental> rentals = this.rentalRepository.findByMemberId(id);
-        member.setRentals(rentals);
+        //member.setRentals(rentals);
         return RentalMapper.INSTANCE.rentalsToListResponse(rentals);
     }
 }
