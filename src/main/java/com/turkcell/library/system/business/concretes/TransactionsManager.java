@@ -18,14 +18,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionsManager implements TransactionService {
     private final TransactionRepository transactionRepository;
-    private final BookRepository bookRepository;
     private final EmployeeRepository employeeRepository;
-    private final MemberRepository memberRepository;
     private final RentalRepository rentalRepository;
     private final TransactionBusinessRules transactionBusinessRules;
 
     @Override
     public AddResponseTransaction addTransaction(AddRequestTransaction addRequestTransaction) {
+        this.transactionBusinessRules.checkIfRentalExists(addRequestTransaction.getRentalId());
+        this.transactionBusinessRules.checkIfEmployeeExists(addRequestTransaction.getEmployeeId());
         this.transactionBusinessRules.checkIfDebtNormal(addRequestTransaction.getDebt());
         Transaction transaction = TransactionMapper.INSTANCE.addRequestToTransaction(addRequestTransaction);
         transaction.setEmployee(this.employeeRepository.findById(addRequestTransaction.getEmployeeId()).orElseThrow());
@@ -36,6 +36,9 @@ public class TransactionsManager implements TransactionService {
 
     @Override
     public UpdateResponseTransaction updateTransaction(UpdateRequestTransaction updateRequestTransaction) {
+        this.transactionBusinessRules.checkIfRentalExists(updateRequestTransaction.getRentalId());
+        this.transactionBusinessRules.checkIfEmployeeExists(updateRequestTransaction.getEmployeeId());
+        this.transactionBusinessRules.checkIfDebtNormal(updateRequestTransaction.getDebt());
         Transaction transaction = TransactionMapper.INSTANCE.updateRequestToTransaction(updateRequestTransaction);
         transaction.setEmployee(this.employeeRepository.findById(updateRequestTransaction.getEmployeeId()).orElseThrow());
         transaction.setRental(this.rentalRepository.findById(updateRequestTransaction.getRentalId()).orElseThrow());
@@ -62,10 +65,9 @@ public class TransactionsManager implements TransactionService {
 
     @Override
     public List<ListResponseTransactions> listEmployeeTransactions(int employeeId) {
-        //busines rule define
-        Employee employee = this.employeeRepository.findById(employeeId).orElseThrow();
+        this.transactionBusinessRules.checkIfEmployeeExists(employeeId);
         List<Transaction> transactions = this.transactionRepository.findByEmployeeId(employeeId);
-        employee.setTransactions(transactions);
+        //employee.setTransactions(transactions);
         return TransactionMapper.INSTANCE.transactionsToListResponse(transactions);
     }
 }
