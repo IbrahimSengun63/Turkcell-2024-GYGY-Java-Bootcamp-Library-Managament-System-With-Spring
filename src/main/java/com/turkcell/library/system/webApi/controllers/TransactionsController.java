@@ -41,7 +41,7 @@ public class TransactionsController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<UpdateResponseTransaction> updateTransaction(@RequestBody UpdateRequestTransaction updateRequestTransaction) {
+    public ResponseEntity<UpdateResponseTransaction> updateTransaction(@RequestBody @Valid UpdateRequestTransaction updateRequestTransaction) {
         UpdateResponseTransaction response = this.transactionService.updateTransaction(updateRequestTransaction);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +56,7 @@ public class TransactionsController {
         this.transactionService.deleteTransaction(id);
     }
 
-    @GetMapping("/getTransactionByEmployee/{id}")
+    @GetMapping("/getTransactionsByEmployee/{id}")
     public List<ListResponseTransactions> getTransactionByEmployee(@PathVariable int id) {
         return this.transactionService.listEmployeeTransactions(id);
     }
